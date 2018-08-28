@@ -6,10 +6,11 @@
       </div>
   		<div class="header-input">内容</div>
   		<div class="header-right">
-        城市
+        <router-link to="/city">城市</router-link>
         <span class="iconfont icon-back">&#xe6aa;</span>  
       </div>
   	</div>
+    <router-view></router-view>
   </div>
 </template>
 
