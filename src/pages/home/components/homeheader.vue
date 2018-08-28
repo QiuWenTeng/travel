@@ -21,6 +21,9 @@ export default{
 </script>
 
 <style lang="stylus" scoped>
+  a{
+    color: #fff; 
+  }
 	.header{
     display: flex;
     height: .86rem;
