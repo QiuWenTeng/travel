@@ -6,7 +6,7 @@
       </div>
   		<div class="header-input">内容</div>
   		<div class="header-right">
-        <router-link to="/city">城市</router-link>
+        <router-link to="/city">{{currentCity}}</router-link>
         <span class="iconfont icon-back">&#xe6aa;</span>  
       </div>
   	</div>
@@ -16,7 +16,11 @@
 
 <script>
 export default{
-	
+	data(){
+    return {
+      currentCity: this.$store.state.currentcity
+    }
+  }
 }
 </script>
 

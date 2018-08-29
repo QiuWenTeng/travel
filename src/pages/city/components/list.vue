@@ -3,30 +3,18 @@
 		<div class="title">选中城市</div>
 		<div class="selContent">
 			<div class="button-wrap">
-				<div class="button">北京</div>
+				<div class="button">{{currentcity}}</div>
 			</div>
 		</div>
 		<div class="title">热门城市</div>
 		<div class="selContent">
-			<div class="button-wrap">
-				<div class="button">北京</div>
-			</div>
-			<div class="button-wrap">
-				<div class="button">上海</div>
-			</div>
-			<div class="button-wrap">
-				<div class="button">深圳</div>
-			</div>
-			<div class="button-wrap">
-				<div class="button">广州</div>
-			</div>
-			<div class="button-wrap">
-				<div class="button">杭州</div>
+			<div class="button-wrap" v-for="item of hotCities" @click="selectCity(item.name)">
+				<div class="button" :data-id="item.id">{{item.name}}</div>
 			</div>
 		</div>
 		<div class="list" v-for="(itemlist, key) of cityList" :data-key="key">
 			<div class="title">{{key}}</div>
-			<div class="list-item" v-for="item of itemlist" :data-id="item.id">
+			<div class="list-item" v-for="item of itemlist" :data-id="item.id" @click="selectCity(item.name)">
 				{{item.name}}
 			</div>
 		</div>
@@ -40,12 +28,20 @@ import axios from 'axios'
 export default{
 	data(){
 		return {
-			cityList: {}
+			currentcity: this.$store.state.currentcity,
+			cityList: {},
+			hotCities: []
 		}
 	},
 	methods: {
 		setCityData: function(res){
 			this.cityList = res.data.data.cities;
+			this.hotCities = res.data.data.hotCities;
+		},
+		selectCity: function(val){
+			this.currentcity = val;
+			this.$store.commit('changeCity', val);
+			this.$router.push('/');
 		}
 	},
 	mounted: function(){

@@ -19,7 +19,8 @@ export default{
 	position: absolute;
 	right: 0;
 	top: 2rem;
-	width: .4rem
+	width: .4rem;
+	height: 100%
 }
 .list li{
 	padding: .1rem;
