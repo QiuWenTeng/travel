@@ -1,13 +1,18 @@
 <template>
 	<ul class="list">
-		<li v-for="(item, key) of cities">{{key}}</li>
+		<li v-for="(item, key) of cities" @click="getLetter">{{key}}</li>
 		<li>B</li>
 	</ul>
 </template>
 
 <script>
 export default{
-	props:['cities']
+	props:['cities'],
+	methods:{
+		getLetter: function(e){
+			this.$emit('changeLetter', e.target.innerHTML);
+		}
+	}
 }
 </script>
 

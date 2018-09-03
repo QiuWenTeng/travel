@@ -18,7 +18,7 @@
 				</div>
 			</div>
 			<div class="area">
-				<div class="list" v-for="(itemlist, key) of cityList" :data-key="key">
+				<div class="list" v-for="(itemlist, key) of cityList" :data-key="key" :ref="key">
 					<div class="title">{{key}}</div>
 					<div class="list-item" v-for="item of itemlist" :data-id="item.id" @click="selectCity(item.name)">
 						{{item.name}}
@@ -39,12 +39,20 @@ export default{
 			currentcity: this.$store.state.currentcity,
 		}
 	},
-	props: ['cityList', 'hotCities'],
+	props: ['cityList', 'hotCities', 'letter'],
 	methods: {
 		selectCity: function(val){
 			this.currentcity = val;
 			this.$store.commit('changeCity', val);
 			this.$router.push('/');
+		}
+	},
+	watch: {
+		letter () {
+			if (this.letter) {
+				const element = this.$refs[this.letter][0];
+				this.scroll.scrollToElement(element);
+			}
 		}
 	},
 	mounted: function(){

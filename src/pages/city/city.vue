@@ -2,8 +2,8 @@
 	<div>
 		<header-show></header-show>
 		<search-show></search-show>
-		<list-show :hotCities="hotCities" :cityList="cities"></list-show>
-		<english-show :cities="cities"></english-show>
+		<list-show :hotCities="hotCities" :cityList="cities" :letter="letter"></list-show>
+		<english-show :cities="cities" @changeLetter="getNewLetter"></english-show>
 	</div>
 </template>
 
@@ -23,7 +23,8 @@ export default{
 	data(){
 		return{
 			cities: [],
-			hotCities: []
+			hotCities: [],
+			letter: ''
 		}
 	},
 	methods: {
@@ -31,6 +32,9 @@ export default{
 			var data = data.data.data;
 			this.cities = data.cities;
 			this.hotCities = data.hotCities;
+		},
+		getNewLetter: function(data){
+			this.letter = data;
 		}
 	},
 	mounted: function(){
