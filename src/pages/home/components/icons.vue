@@ -1,55 +1,11 @@
 <template>
 	<div class="icons">
-		<swiper ref="mySwiper">
-			<swiper-slide>
-				<div class="icon">
+		<swiper :options="swiperOption" ref="mySwiper">
+			<swiper-slide v-for="(page, index) of pages" :key="index">
+				<div class="icon" v-for="(data, index) of page">
 					<div>
-						<img src="http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png">
-						<p>热门景点</p>
-					</div>
-				</div>
-				<div class="icon">
-					<div>
-						<img src="http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png">
-						<p>北京必游</p>
-					</div>
-				</div>
-				<div class="icon">
-					<div>
-						<img src="http://img1.qunarzz.com/piao/fusion/1803/6a/45f595250c73d102.png">
-						<p>夏日游水</p>
-					</div>
-				</div>
-				<div class="icon">
-					<div>
-						<img src="http://img1.qunarzz.com/piao/fusion/1803/20/831d62d2e1c7be02.png">
-						<p>文化古迹</p>
-					</div>
-				</div>
-			</swiper-slide>
-			<swiper-slide>
-				<div class="icon">
-					<div>
-						<img src="http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png">
-						<p>动植物园</p>
-					</div>
-				</div>
-				<div class="icon">
-					<div>
-						<img src="http://img1.qunarzz.com/piao/fusion/1803/76/eb88861d78fb9902.png">
-						<p>故宫</p>
-					</div>
-				</div>
-				<div class="icon">
-					<div>
-						<img src="http://img1.qunarzz.com/piao/fusion/1803/6c/9e54a8540fee0102.png">
-						<p>一日游</p>
-					</div>
-				</div>
-				<div class="icon">
-					<div>
-						<img src="http://img1.qunarzz.com/piao/fusion/1804/95/8d02011d149bdb02.png">
-						<p>汽车票</p>
+						<img :src="data.imgUrl">
+						<p class="textell">{{data.desc}}</p>
 					</div>
 				</div>
 			</swiper-slide>
@@ -61,16 +17,32 @@
 export default{
 	data(){
 		return {
-			
+			swiperOption: {
+				pagination: '.swiper-pagination',
+				loop: true
+			}
+		}
+	},
+	props: [
+		'list'
+	],
+	computed: {
+		pages(){
+			var pages = [];
+			this.list.forEach(function(item, index){
+				var page = Math.floor(index / 8);
+				if (!pages[page]) {
+					pages[page] = [];
+				}
+				pages[page].push(item);
+			})
+			return pages;
 		}
 	}
 }
 </script>
 
 <style type="text/css" scoped>
-	.icons{
-		background: green
-	}
 	.icon{
 		width: 25%;
 		height: 25%;
@@ -81,5 +53,10 @@ export default{
 	.icon img{
 		margin: 10% 0;
 		width: 50%;
+	}
+	.textell{
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 </style>

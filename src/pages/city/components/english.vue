@@ -1,13 +1,13 @@
 <template>
 	<ul class="list">
-		<li>A</li>
+		<li v-for="(item, key) of cities">{{key}}</li>
 		<li>B</li>
 	</ul>
 </template>
 
 <script>
 export default{
-	
+	props:['cities']
 }
 </script>
 
@@ -17,12 +17,12 @@ export default{
 	flex-direction: column;
 	justify-content: center;
 	position: absolute;
+	top: 1.5rem;
 	right: 0;
-	top: 2rem;
+	bottom: 0;
 	width: .4rem;
-	height: 100%
 }
 .list li{
-	padding: .1rem;
+	padding: .05rem;
 }
 </style>

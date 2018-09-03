@@ -1,8 +1,8 @@
 <template>
 	<div class="wrap">
-		<swiper :options="swiperOption" ref="mySwiper">
-		    <swiper-slide v-for="item of siperList">
-		    	<img class="swiper-img" :data-id="item.id" :src="item.url">
+		<swiper :options="swiperOption" ref="mySwiper" v-if="isShow">
+		    <swiper-slide v-for="item of list">
+		    	<img class="swiper-img" :data-id="item.id" :src="item.imgUrl">
 		    </swiper-slide>
 		    <div class="swiper-pagination"  slot="pagination"></div>
 		</swiper>
@@ -28,6 +28,12 @@ export default{
 				}
 			]
 		}
+	},
+	props: ['list'],
+	computed: {
+		isShow(){
+			return this.list.length
+		}
 	}
 }
 </script>
@@ -39,7 +45,7 @@ export default{
 	.wrap{
 		width: 100%;
 		overflow: hidden;
-		padding-bottom: 27%;
+		padding-bottom: 30.5%;
 		height: 0 
 	}
 	.swiper-img{
