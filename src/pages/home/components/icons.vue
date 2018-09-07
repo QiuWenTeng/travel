@@ -1,6 +1,6 @@
 <template>
 	<div class="icons">
-		<swiper :options="swiperOption" ref="mySwiper">
+		<swiper :options="swiperOption" ref="mySwiper" v-if="isShow">
 			<swiper-slide v-for="(page, index) of pages" :key="index">
 				<div class="icon" v-for="(data, index) of page">
 					<div>
@@ -27,7 +27,7 @@ export default{
 		'list'
 	],
 	computed: {
-		pages(){
+		pages () {
 			var pages = [];
 			this.list.forEach(function(item, index){
 				var page = Math.floor(index / 8);
@@ -37,6 +37,9 @@ export default{
 				pages[page].push(item);
 			})
 			return pages;
+		},
+		isShow () {
+			return this.list.length
 		}
 	}
 }

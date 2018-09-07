@@ -12,8 +12,8 @@
 			<div class="area">
 				<div class="title">热门城市</div>
 				<div class="selContent">
-					<div class="button-wrap" v-for="item of hotCities" @click="selectCity(item.name)">
-						<div class="button" :data-id="item.id">{{item.name}}</div>
+					<div class="button-wrap" v-for="item of hotCities" :key="item.id">
+						<div class="button" :data-id="item.id" @click="selectCity(item.name)">{{item.name}}</div>
 					</div>
 				</div>
 			</div>
